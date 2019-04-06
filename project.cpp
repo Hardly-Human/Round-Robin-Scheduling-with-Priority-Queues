@@ -1,11 +1,96 @@
 #include<stdio.h>
 
+struct process			            // process structure
+{
+	int pid;
+	int Arrival_time;
+	int burst_time;
+	int completion_time;
+	int remaining_burst_time;
+} faculty[100], student[100], m[100];     // Queues for Faculty and Students.......
 
-void input();     // for taking inputs from user...
-void job_scheduler();    // for scheduling according to priority..
-void Round_Robin();     //  round_robin algorithm implmentation
-void result();			//   for displaying results....
 
+void input();                             // for taking inputs from user...
+void job_scheduler();                    // for scheduling according to priority..
+void Round_Robin();                      //  round_robin algorithm implmentation
+void result();	        	        //   for displaying results....
+
+int a, fac=0, stu=0, mc=0;              // Global variables
+int time_quanta;
+
+
+void input()                           // function taking inputs from user...
+{
+	int map,  i, j;
+	printf("Enter Total number of Queries: "); 
+	scanf("%d", &a);
+	
+	if(a==0)
+	{ 
+		printf("\n No queries\n"); 
+	}
+	
+	else
+	{
+			printf("\nEnter Time_Quanta for each Process: "); 
+			scanf("%d", &time_quanta);
+				
+			int qno = 1 ;
+			for(i=0; i<a; i++)
+			{
+				
+				printf("\nQuery:%d",qno);
+				printf("\nEnter 1 for faculty and 2 for student  process Type (1 or 2): "); 
+				scanf("%d", &map);
+				if(map==1)
+				{
+					printf("\nprocess Id: "); 
+					scanf("%d", &faculty[fac].pid);
+					printf("Arrival Time (Enter in \"1000\" format) (1000 - 1200) : ");
+					scanf("%d", &j);
+				
+					if(j<1000 || j>1200)
+					{
+						system("cls");
+						printf("\nPlease Enter Correct time\n\n");
+						input();
+					}
+					
+					else
+					{
+						faculty[fac].Arrival_time= j-1000;
+					}
+					printf("Burst Time: "); 
+					scanf("%d", &faculty[fac].burst_time);	 
+					faculty[fac].remaining_burst_time= faculty[fac].burst_time; 
+					fac++;
+					}
+				 	else
+					{
+						printf("Process Id: "); 
+						scanf("%d", &student[stu].pid);
+						printf("Arrival Time (Enter in \"1000\" format) (1000 - 1200) :"); 
+						scanf("%d", &j); 
+						if(j<1000 || j>1200)
+						{
+							system("cls");
+							printf("\nPlease Enter Correct time\n\n");
+							input();
+						}
+					else 
+					{
+						student[stu].Arrival_time= j-1000; 
+					}
+						printf("Burst Time: "); 
+						scanf("%d", &student[stu].burst_time);	 
+						student[stu].remaining_burst_time= student[stu].burst_time;
+						stu++;
+					}
+			qno++;
+			}
+	}
+	
+}
 int main()
  {
  		
@@ -19,4 +104,5 @@ int main()
 		
 		return(0);
 }
+
 
