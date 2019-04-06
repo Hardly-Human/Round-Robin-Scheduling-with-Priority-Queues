@@ -200,8 +200,27 @@ void job_scheduler()                   // comparing and scheduing jobs in queue.
 	}
 }
 
+void result()                  // function that prints results to screen.....
+{
+	int i=0, total=0, sum=0; 
+	double avg;
+	printf("\n\n\nSummary for the Execution\n");
+	printf("\nQuery ID\tArrival Time\tBurst Time\tWaiting Time\tTurn Around Time");
+	for(i; i<mc; i++)
+	{
+		printf("\n%d\t\t%d\t\t%d\t\t%d\t\t%d\n",m[i].pid, (m[i].Arrival_time+1000), m[i].burst_time,
+		((m[i].completion_time-m[i].Arrival_time)- m[i].burst_time) ,(m[i].completion_time-m[i].Arrival_time) );
+		total= m[i].completion_time;
+		sum+= (m[i].completion_time-m[i].Arrival_time);
+	}
+	avg = sum/mc;
+	printf("\n\nTotal time Spent for all queries: %d", total);
+	printf("\nAverage time per query: %lf", avg);
+	printf("\nProcess Execution Completed");
+}
 
-int main()
+
+int main()          // main() function...
  {
  		printf("\t\t ONLINE QUERY HANDLER \t\t\n ");
 	 	printf("\nWelcome,\nplease follow given instruction in the program\n\n");
