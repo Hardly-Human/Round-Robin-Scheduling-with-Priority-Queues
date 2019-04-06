@@ -124,10 +124,85 @@ void Round_Robin()                     // Applying Round-Robin Algorithm....
 	}	
 }
 
+void job_scheduler()                   // comparing and scheduing jobs in queue......
+{
+	int iStu=0, iFac= 0, minimum, flag;
+	if( fac!=0  && stu!=0)
+	{
+		while(iStu<stu && iFac<fac)
+		{
+			if(faculty[iFac].Arrival_time == student[iStu].Arrival_time)
+			{
+				m[mc] = faculty[iFac];
+				mc++;
+				iFac++;
+				m[mc]= student[iStu];
+				mc++;
+				iStu++;
+			}
+			else if(faculty[iFac].Arrival_time < student[iStu].Arrival_time)
+			{
+				m[mc]= faculty[iFac];
+				mc++;
+				iFac++;
+			}
+			else if(faculty[iFac].Arrival_time > student[iStu].Arrival_time)
+			{
+				m[mc]= student[iStu];
+				mc++;
+				iStu++;
+			}
+			else;
+		}
+		if(mc != (fac+stu))
+		{
+			if(fac!=iFac)
+			{
+				while(iFac!=fac)
+				{
+					m[mc]= faculty[iFac];
+					mc++;
+					iFac++;
+				}
+			}
+			else if(stu!=iStu)
+			{
+				while(iStu!=stu)
+				{
+					m[mc]= student[iStu];
+					mc++;
+					iStu++;
+				}
+			}
+		}
+	}
+	else if(fac==0)
+	{
+		while(iStu!=stu)
+		{
+			m[mc]= student[iStu];
+			mc++;
+			iStu++;
+		}
+	}
+	else if(stu==0)
+	{
+		while(iFac!=fac)
+		{
+			m[mc]= faculty[iFac];
+			mc++;
+			iFac++;
+		}
+	}
+	else 
+	{
+		printf("\n No valid processs available\n");
+	}
+}
+
 
 int main()
  {
- 		
  		printf("\t\t ONLINE QUERY HANDLER \t\t\n ");
 	 	printf("\nWelcome,\nplease follow given instruction in the program\n\n");
 	 	
