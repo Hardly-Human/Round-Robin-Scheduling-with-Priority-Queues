@@ -91,6 +91,40 @@ void input()                           // function taking inputs from user...
 	}
 	
 }
+
+void Round_Robin()                     // Applying Round-Robin Algorithm....
+{
+	int time= m[0].Arrival_time, mark=0, cc=0, i, rc;
+	while(time!=120 && cc!=mc)
+	{
+		for(i=0; i<=mark; i++)
+		{
+			if(m[i].remaining_burst_time > time_quanta)
+			{
+				time += time_quanta;
+				m[i].remaining_burst_time -= time_quanta;
+			}
+			else if(m[i].remaining_burst_time <=time_quanta && m[i].remaining_burst_time !=0)
+			{
+				time += m[i].remaining_burst_time;
+				m[i].remaining_burst_time =0;
+				m[i].completion_time = time;
+				cc++;
+			}
+			
+		}
+		int start = mark+1;
+		for(rc= start; rc<mc; rc++)
+		{
+			if(m[rc].Arrival_time <= time)
+			{
+				mark++;
+			}
+		}
+	}	
+}
+
+
 int main()
  {
  		
